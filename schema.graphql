@@ -1,0 +1,46 @@
+type Registry @entity {
+  id: ID!
+  address: String!
+}
+
+type Module @entity {
+  id: ID!
+
+  address: String!
+  name: String!
+  description: String!
+}
+
+type Portal @entity {
+  id: ID!
+
+  address: String!
+  name: String!
+  description: String!
+}
+
+type Schema @entity {
+  id: ID!
+
+  schemaId: String!
+  name: String!
+  description: String!
+  context: String!
+  schema: String!
+}
+
+type Attestation @entity {
+  id: ID!
+
+  schema: String!
+  replaceBy: String!
+  attester: String!
+  portal: String!
+  createdAt: BigInt!
+  expireAt: BigInt!
+  revokeAt: BigInt!
+  version: Int!
+  revoked: Boolean!
+  subject: String!
+  data: String!
+}

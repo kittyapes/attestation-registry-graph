@@ -1,0 +1,24 @@
+{
+  "linea": {
+    "Router": {
+      "address": "0x4d3a380A03f3a18A5dC44b01119839D8674a552E",
+      "startBlock": 346692
+    },
+    "AttestationRegistry": {
+      "address": "0x3de3893aa4Cdea029e84e75223a152FD08315138",
+      "startBlock": 346695
+    },
+    "ModuleRegistry": {
+      "address": "0xf851513A732996F22542226341748f3C9978438f",
+      "startBlock": 346699
+    },
+    "PortalRegistry": {
+      "address": "0xd5d61e4ECDf6d46A63BfdC262af92544DFc19083",
+      "startBlock": 346703
+    },
+    "SchemaRegistry": {
+      "address": "0x0f95dCec4c7a93F2637eb13b655F2223ea036B59",
+      "startBlock": 346707
+    }
+  }
+}

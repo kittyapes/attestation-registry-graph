@@ -1,0 +1,113 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Router
+    network: linea
+    source:
+      address: "0x4d3a380A03f3a18A5dC44b01119839D8674a552E"
+      abi: Router
+      startBlock: 346692
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Registry
+      abis:
+        - name: Router
+          file: ./abis/Router.json
+      eventHandlers:
+        - event: AttestationRegistryUpdated(indexed address)
+          handler: handleAttestationRegistryUpdated
+        - event: ModuleRegistryUpdated(indexed address)
+          handler: handleModuleRegistryUpdated
+        - event: PortalRegistryUpdated(indexed address)
+          handler: handlePortalRegistryUpdated
+        - event: SchemaRegistryUpdated(indexed address)
+          handler: handleSchemaRegistryUpdated
+      file: ./src/router.ts
+
+templates:
+  - name: AttestRegistry
+    kind: ethereum/contract
+    network: linea
+    source:
+      abi: AttestRegistry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/registry.ts
+      entities:
+        - Registry
+        - Attestation
+      abis:
+        - name: AttestRegistry
+          file: ./abis/AttestRegistry.json
+      eventHandlers:
+        - event: AttestationRegistered(indexed bytes32)
+          handler: handleAttestationRegistered
+        - event: AttestationRevoked(bytes32,bytes32)
+          handler: handleAttestationRevoked
+
+  - name: ModuleRegistry
+    kind: ethereum/contract
+    network: linea
+    source:
+      abi: ModuleRegistry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/registry.ts
+      entities:
+        - Registry
+        - Module
+      abis:
+        - name: ModuleRegistry
+          file: ./abis/ModuleRegistry.json
+      eventHandlers:
+        - event: ModuleRegistered(string,string,address)
+          handler: handleModuleRegistered
+
+  - name: PortalRegistry
+    kind: ethereum/contract
+    network: linea
+    source:
+      abi: PortalRegistry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/registry.ts
+      entities:
+        - Registry
+        - Portal
+      abis:
+        - name: PortalRegistry
+          file: ./abis/PortalRegistry.json
+      eventHandlers:
+        - event: PortalRegistered(string,string,address)
+          handler: handlePortalRegistered
+
+  - name: SchemaRegistry
+    kind: ethereum/contract
+    network: linea
+    source:
+      abi: SchemaRegistry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/registry.ts
+      entities:
+        - Registry
+        - Schema
+      abis:
+        - name: SchemaRegistry
+          file: ./abis/SchemaRegistry.json
+      eventHandlers:
+        - event: SchemaCreated(indexed bytes32,string,string,string,string)
+          handler: handleSchemaCreated
