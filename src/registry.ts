@@ -1,4 +1,4 @@
-import { BigDecimal, log } from "@graphprotocol/graph-ts";
+import { log } from "@graphprotocol/graph-ts";
 import {
   AttestationRegistered,
   AttestRegistry,
@@ -21,7 +21,7 @@ export function handleAttestationRegistered(
   event: AttestationRegistered
 ): void {
   const registry = Registry.load("attestation");
-  if (registry === null || registry.address !== event.address.toHex()) {
+  if (registry === null || registry.address != event.address.toHex()) {
     log.warning("Not registered attestation registry: {}", [
       event.address.toHexString(),
     ]);
@@ -48,7 +48,7 @@ export function handleAttestationRegistered(
 
 export function handleModuleRegistered(event: ModuleRegistered): void {
   const registry = Registry.load("module");
-  if (registry === null || registry.address !== event.address.toHex()) {
+  if (registry === null || registry.address != event.address.toHex()) {
     log.warning("Not registered module registry: {}", [
       event.address.toHexString(),
     ]);
@@ -64,7 +64,7 @@ export function handleModuleRegistered(event: ModuleRegistered): void {
 
 export function handlePortalRegistered(event: PortalRegistered): void {
   const registry = Registry.load("portal");
-  if (registry === null || registry.address !== event.address.toHex()) {
+  if (registry === null || registry.address != event.address.toHex()) {
     log.warning("Not registered portal registry: {}", [
       event.address.toHexString(),
     ]);
@@ -80,7 +80,7 @@ export function handlePortalRegistered(event: PortalRegistered): void {
 
 export function handleSchemaCreated(event: SchemaCreated): void {
   const registry = Registry.load("schema");
-  if (registry === null || registry.address !== event.address.toHex()) {
+  if (registry === null || registry.address != event.address.toHex()) {
     log.warning("Not registered schema registry: {}", [
       event.address.toHexString(),
     ]);
@@ -92,8 +92,8 @@ export function handleSchemaCreated(event: SchemaCreated): void {
     event.params.schemaString.toString()
   );
 
-  const schema = new Schema(event.params.id.toString());
-  schema.schemaId = schemaId.toString();
+  const schema = new Schema(event.params.id.toHex());
+  schema.schemaId = schemaId.toHex();
   schema.name = event.params.name.toString();
   schema.description = event.params.description.toString();
   schema.context = event.params.context.toString();
